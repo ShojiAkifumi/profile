@@ -74,8 +74,52 @@ body {
 .main-field {
   border-top: solid 1px rgba(255, 255, 255, 0.5);
   padding-top: 8rem;
+  position: relative;
   @media (width >= 768px) {
     padding-top: 15rem;
+  }
+}
+
+.main-field .scroll-box {
+  position: absolute;
+  top: -5rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .scroll-text {
+    color: #fff;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 5rem;
+    background-color: #fff;
+    animation: lineAnimation 1.5s linear infinite;
+  }
+}
+
+@keyframes lineAnimation {
+  0% {
+    transform-origin: top;
+    transform: scaleY(0);
+  }
+  10% {
+    transform: scaleY(0);
+  }
+  55% {
+    transform-origin: top;
+    transform: scaleY(1);
+  }
+  56% {
+    transform-origin: bottom;
+    transform: scaleY(1);
+  }
+  100% {
+    transform-origin: bottom;
+    transform: scaleY(0);
   }
 }
 
@@ -126,7 +170,20 @@ body {
   @media (width >= 640px) {
     .menu-parent {
       position: relative;
-      cursor: pointer;
+      .parent-btn {
+        position: relative;
+        padding-right: 2.5rem;
+        &::after {
+          position: absolute;
+          content: "";
+          right: 0;
+          height: 95%;
+          width: 2rem;
+          top: 5%;
+          background: no-repeat center/contain url(../img/angle-down-solid-full.svg);
+          transition: transform 0.3s;
+        }
+      }
       .menu-child {
         position: absolute;
         top: 100%;
@@ -140,9 +197,13 @@ body {
         overflow: hidden;
         a {
           padding: 1.5rem 0.25rem 0.25rem;
+          width: fit-content;
         }
       }
       &:has(:hover) {
+        .parent-btn::after {
+          transform: rotate(180deg);
+        }
         .menu-child {
           overflow: visible;
           height: unset;
@@ -309,14 +370,33 @@ body {
     }
     nav {
       flex-direction: column;
-      font-size: 4rem;
+      font-size: 3rem;
       width: calc(100% - 4rem);
       padding: 0 2rem;
       margin-bottom: 10rem;
       .header-menu-link {
         width: 100%;
-        padding-bottom: 3rem;
+        padding: 0 2rem 2rem;
         border-bottom: solid 1px #fff;
+      }
+    }
+    .menu-parent {
+      width: 100%;
+      padding: 0 2rem;
+    }
+    .parent-btn {
+      padding: 0 0 2rem;
+    }
+    .menu-child {
+      padding-left: 2rem;
+      a {
+        display: block;
+        font-size: 0.9em;
+        padding: 2rem;
+        border-bottom: solid 1px #fff;
+        &:first-child {
+          border-top: solid 1px #fff;
+        }
       }
     }
   }
@@ -332,6 +412,11 @@ body {
   font-size: 4rem;
   font-family: "Gilroy", "Noto Sans JP", sans-serif;
   letter-spacing: 0.01em;
+  text-shadow: 0 0 8px #666;
+}
+
+.name-jp {
+  text-shadow: 0 0 4px #666;
 }
 
 @media (width >= 540px) {
@@ -442,7 +527,7 @@ p {
   }
 }
 
-.plofile-section {
+.profile-section {
   p {
     line-height: 2.2em;
   }
