@@ -404,7 +404,7 @@ body {
 
 .main-name {
   text-align: right;
-  margin-top: 40%;
+  margin-top: min(55dvh, 90%);
   margin-bottom: 5rem;
 }
 
