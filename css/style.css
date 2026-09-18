@@ -149,15 +149,21 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
+@media (width < 640px) {
+  .header-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
 .header-menu nav {
   display: flex;
   align-items: center;
-  gap: 3rem;
   letter-spacing: 0.1em;
   font-family: "Gilroy", "Noto Sans JP", sans-serif;
   font-size: 2rem;
   @media (width >= 640px) {
+    gap: 3rem;
     .menu-parent {
       position: relative;
       .parent-btn {
@@ -351,9 +357,7 @@ body {
     width: 100dvw;
     background-color: #111d;
     z-index: 2;
-    display: flex;
     justify-content: center;
-    align-items: center;
     transition: left 0.5s;
     &.menu-open {
       left: 0;
@@ -366,8 +370,11 @@ body {
       margin-bottom: 10rem;
       .header-menu-link {
         width: 100%;
-        padding: 0 2rem 2rem;
         border-bottom: solid 1px #fff;
+        a {
+          display: block;
+          padding: 2rem;
+        }
       }
     }
     .menu-parent {
@@ -375,7 +382,7 @@ body {
       padding: 0 2rem;
     }
     .parent-btn {
-      padding: 0 0 2rem;
+      padding: 2rem 0;
     }
     .menu-child {
       padding-left: 2rem;
