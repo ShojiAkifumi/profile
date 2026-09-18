@@ -411,6 +411,8 @@ body {
   z-index: -1;
   animation: mainParallax linear;
   animation-timeline: scroll(root);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
   @media (width < 540px) {
     background-size: 130%;
     background-position: 20% center;
