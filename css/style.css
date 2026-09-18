@@ -48,18 +48,6 @@ body {
   }
 }
 
-.main-v {
-  width: 100%;
-  max-width: 1440px;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(0);
-  z-index: -1;
-  animation: mainParallax linear;
-  animation-timeline: scroll(root);
-}
-
 @keyframes mainParallax {
   to {
     transform: translateX(-50%) translateY(260rem);
@@ -404,10 +392,36 @@ body {
   }
 }
 
+.main-v {
+  width: 100%;
+  max-width: 1440px;
+  background: no-repeat center/cover url(../img/main-v.jpg);
+  aspect-ratio: 1 / 1.2;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  z-index: -1;
+  animation: mainParallax linear;
+  animation-timeline: scroll(root);
+  @media (width < 540px) {
+    background-size: 130%;
+    background-position: 20% center;
+    aspect-ratio: 1 / 1.6;
+  }
+}
+
 .main-name {
   text-align: right;
   margin-top: min(55dvh, 90%);
-  margin-bottom: 5rem;
+  @media (width >= 768px) {
+    margin-top: 55dvh;
+    margin-bottom: 5rem;
+  }
+  @media (width < 768px) {
+    margin-top: 80vw;
+    margin-bottom: 20vw;
+  }
 }
 
 .name-en {
