@@ -670,7 +670,6 @@ p {
 .skills-lerning-history-block {
   padding-top: 4rem;
   border-top: solid 1px #fff;
-  border-bottom: solid 2px rgba(255, 255, 255, 0.5);
   @media (width >= 768px) {
     padding-top: 8rem;
   }
@@ -678,6 +677,11 @@ p {
 
 .history-block {
   border-top: solid 1px #555;
+  hr {
+    border: none;
+    height: 2px;
+    border-bottom: solid 2px rgba(255, 255, 255, 0.5);
+  }
 }
 
 .history-row {
@@ -753,11 +757,11 @@ p {
 .access-block .container {
   border-top: solid 2px #fff;
   border-bottom: solid 2px #fff;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
   @media (width >= 768px) {
     padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-bottom: 7rem;
   }
 }
 
@@ -771,9 +775,9 @@ p {
 
 .access-address-block {
   display: flex;
-  margin-top: 4rem;
+  margin-bottom: 2rem;
   @media (width >= 768px) {
-    margin-top: 8rem;
+    margin-bottom: 3rem;
   }
   justify-content: center;
   align-items: center;
@@ -845,7 +849,7 @@ p {
 }
 
 .profile-section figure.fade-target {
-  transition-delay: 1s;
+  transition-delay: 0.5s;
 }
 
 .careers-section p.fade-target {
@@ -858,6 +862,10 @@ p {
 
 .main-field.fade-target {
   transition-delay: 1.5s;
+}
+
+.scroll-box.fade-target {
+  transition-delay: 1.75s;
 }
 
 @media (width >= 768px) {

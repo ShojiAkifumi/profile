@@ -24,7 +24,7 @@ function checkFadeIn() {
   targets.forEach((target) => {
     const rect = target.getBoundingClientRect();
 
-    if (["main-field", "name-jp"].some((cls) => target.classList.contains(cls))) {
+    if (["main-field", "name-jp", "scroll-box"].some((cls) => target.classList.contains(cls))) {
       target.classList.add("is-visible");
     } else if (rect.top <= triggerHeight) {
       target.classList.add("is-visible");
