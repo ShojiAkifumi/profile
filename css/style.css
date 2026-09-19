@@ -421,7 +421,6 @@ body {
 }
 
 .main-name {
-  text-align: right;
   margin-top: min(55dvh, 90%);
   @media (width >= 768px) {
     margin-top: 55dvh;
@@ -434,6 +433,8 @@ body {
 }
 
 .name-en {
+  width: fit-content;
+  margin-left: auto;
   font-size: 4rem;
   font-family: "Gilroy", "Noto Sans JP", sans-serif;
   letter-spacing: 0.01em;
@@ -441,6 +442,8 @@ body {
 }
 
 .name-jp {
+  width: fit-content;
+  margin-left: auto;
   text-shadow: 0 0 4px #666;
 }
 
@@ -822,4 +825,103 @@ p {
   padding-bottom: 3rem;
   text-align: center;
   font-size: 1.4rem;
+}
+
+/* フェードイン演出 */
+.fade-target {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: 1s ease;
+}
+
+.fade-target.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.profile-section figure.fade-target {
+  transition-delay: 1s;
+}
+
+.careers-section p.fade-target {
+  transition-delay: 0.5s;
+}
+
+.name-jp.fade-target {
+  transition-delay: 1s;
+}
+
+.main-field.fade-target {
+  transition-delay: 1.5s;
+}
+
+@media (width >= 768px) {
+  .hobby-card-2 {
+    transition-delay: 0.25s;
+  }
+  .hobby-card-3 {
+    transition-delay: 0.5s;
+  }
+}
+
+.skill-element-contents {
+  h5.fade-target {
+    transition-delay: 0.25s;
+  }
+  p.fade-target {
+    transition-delay: 0.5s;
+  }
+}
+
+/* タイピング演出 */
+.typing-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* カーソル */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 5px;
+  background: currentColor;
+  vertical-align: -0.15em;
+  box-shadow:
+    0 0 5px currentColor,
+    0 0 12px currentColor;
+  animation: cursor-blink 0.7s steps(1) infinite;
+}
+
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 文字が表示された瞬間の演出 */
+.typing-char {
+  animation: char-glitch 0.3s ease-out;
+}
+
+.typing-text:not(:has(span.typing-char)) {
+  opacity: 0;
+}
+
+@keyframes char-glitch {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 0;
+    transform: translateX(4px);
+    text-shadow:
+      -3px 0 #ff0055,
+      3px 0 #00ffff;
+  }
+
+  5% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
