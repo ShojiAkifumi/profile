@@ -593,9 +593,11 @@ p {
   @media (width >= 768px) {
     padding: 15rem 0;
   }
-  background: no-repeat center 22% / cover;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../img/careers.webp");
-  background-attachment: fixed;
+  /* 背景は ::before に描画してスクロール連動で動かす（iOS対応パララックス） */
+  &::before {
+    background: no-repeat center 22% / cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../img/careers.webp");
+  }
   .container {
     @media (width < 576px) {
       padding-left: 3rem;
@@ -743,14 +745,61 @@ p {
   @media (width >= 768px) {
     padding: 12rem 0;
   }
-  background: no-repeat center / cover;
-  background-image: url("../img/access.webp");
-  background-attachment: fixed;
+  /* 背景は ::before に描画してスクロール連動で動かす（iOS対応パララックス） */
+  &::before {
+    background: no-repeat center / cover;
+    background-image: url("../img/access.webp");
+  }
   .container {
     @media (width < 576px) {
       padding-left: 3rem;
       padding-right: 3rem;
     }
+  }
+}
+
+/* ===== パララックス共通（careers / access） =====
+   background-attachment: fixed は iOS Safari 非対応のため、
+   ブロックより縦に大きい疑似要素を置き、スクロール位置に合わせて transform で動かす */
+.careers-title-block,
+.access-block {
+  position: relative;
+  /* はみ出した背景を切り取る。hidden だとこの要素がスクロールコンテナになり
+     view() の基準がページではなくこの要素になって動かないため clip を使う */
+  overflow: clip;
+  isolation: isolate; /* ::before の z-index:-1 をブロック内に閉じ込める */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -30% 0; /* 上下に30%ずつ大きくして、動かしても隙間が出ないようにする */
+    z-index: -1;
+    will-change: transform;
+  }
+}
+
+/* スクロール駆動アニメーション対応ブラウザ（iOS Safari 26〜 / Chrome 115〜）のみ動かす。
+   非対応ブラウザでは背景が静止表示になるだけで崩れない */
+@supports (animation-timeline: view()) {
+  .careers-title-block::before,
+  .access-block::before {
+    animation: blockParallax linear both;
+    animation-timeline: view(); /* ブロックが画面に入ってから出るまでを進行度にする */
+  }
+}
+
+@keyframes blockParallax {
+  from {
+    transform: translateY(-55%);
+  }
+  to {
+    transform: translateY(55%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .careers-title-block::before,
+  .access-block::before {
+    animation: none;
   }
 }
 
@@ -845,7 +894,8 @@ p {
 
 .fade-target.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  /* translateY(0) でも transform が残ると、子孫の background-attachment: fixed が効かなくなるため none にする */
+  transform: none;
 }
 
 .profile-section figure.fade-target {
